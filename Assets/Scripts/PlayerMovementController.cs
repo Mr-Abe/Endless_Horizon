@@ -1,64 +1,84 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovementController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    // Player speed when moving horizontally.
-    [Header("Horizontal Movement")]
-    [SerializeField] private float autoRunSpeed = 5f;
+    [Header("Movement Settings")]
+    public float runSpeed = 5f;
+    public float jumpForce = 5f;
 
-    // Components for jumping.
-    [Header("Jumping Mechanics")]
-    [SerializeField] private float jumpForce = 7f;
-    private bool isPlayerJumping = false;
-    private Rigidbody2D playerRigidbody;
+    private Rigidbody2D rb;
+    private bool isJumping = false;
+    private bool isGrounded = false;
 
-    // Ground check components.
-    [Header("Ground Check")]
-    [SerializeField] private LayerMask groundLayer; // Assign the layer(s) considered as ground in the Inspector.
-    [SerializeField] private Transform groundCheckPoint; // Assign a point slightly below the player to check for ground.
-    [SerializeField] private float groundCheckRadius = 0.2f; // Radius for the ground check. Adjust accordingly.
+    [Header("Ground Detection")]
+    public Transform groundCheckPoint;
+    public float groundCheckRadius = 0.2f;
+    public LayerMask groundLayer;
 
     private void Start()
     {
-        // Get the Rigidbody2D component from the player.
-        playerRigidbody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        AutoRun();
-
-        // Check if the player is on the ground.
-        bool isPlayerOnGround = Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);
-
-        if (isPlayerOnGround)
-        {
-            isPlayerJumping = false; // Reset jumping state if the player is on the ground.
-        }
-
-        HandleJumping(isPlayerOnGround);
+        GroundCheck();
+        MovePlayer();
+        Jump();
     }
 
-    /// <summary>
-    /// Makes the player character move automatically from left to right.
-    /// </summary>
-    private void AutoRun()
+    private void GroundCheck()
     {
-        transform.Translate(Vector2.right * autoRunSpeed * Time.deltaTime);
+        isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);
     }
 
-    /// <summary>
-    /// Handles the player's jumping mechanics.
-    /// </summary>
-    /// <param name="isPlayerOnGround">Whether the player is currently on the ground.</param>
-    private void HandleJumping(bool isPlayerOnGround)
+    private void MovePlayer()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isPlayerJumping && isPlayerOnGround)
+        // If the "running button" (e.g., left shift) is pressed
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            playerRigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            isPlayerJumping = true;
+            float moveX = Input.GetAxis("Horizontal");
+            rb.velocity = new Vector2(moveX * runSpeed, rb.velocity.y);
         }
     }
+
+    private void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping)
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            isJumping = true;
+        }
+        if (isGrounded)
+        {
+            isJumping = false;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            // This is just an example. You can have a more elaborate Game Over mechanic.
+            GameOver();
+        }
+    }
+
+    void GameOver()
+    {
+        // Stop the game (example)
+        Time.timeScale = 0;
+        // Display some game over message
+        // Optionally reload the scene after a delay or on player input
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("GoldCoin") || other.CompareTag("SilverCoin") || other.CompareTag("BronzeCoin"))
+        {
+            ScoreManager.instance.CollectCoin(other.tag);
+            Destroy(other.gameObject);
+        }
+    }
+
 }

@@ -1,12 +1,19 @@
 using UnityEngine;
 
-public class CameraMoveRight : MonoBehaviour
+public class CameraFollow : MonoBehaviour
 {
-    public float moveSpeed = 5.0f; // The speed at which the camera will move to the right.
+    public Transform target; // Reference to the player
+    public float followSpeed = 5f; // Speed at which the camera follows the player
+    public Vector3 offset = new Vector3(0, 0, -10); // Keeps the camera slightly behind the player
 
-    void Update()
+    private void LateUpdate()
     {
-        // Move the camera to the right.
-        transform.position += new Vector3(moveSpeed * Time.deltaTime, 0, 0);
+        // Desired position is where the camera wants to be
+        Vector3 desiredPosition = new Vector3(target.position.x, target.position.y, offset.z);
+        
+        // Lerp smoothly interpolates between the camera's current position and its desired position
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, followSpeed * Time.deltaTime);
+        
+        transform.position = smoothedPosition;
     }
 }

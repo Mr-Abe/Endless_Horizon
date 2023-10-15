@@ -21,5 +21,5 @@ public class LoopingBackground : MonoBehaviour
             newPosition.x += spriteWidth;
             transform.position = newPosition;
         }
-    }
+    } 
 }

@@ -7,6 +7,9 @@ TagManager:
   - Sky
   - Dunes
   - Ground
+  - GoldCoin
+  - SilverCoin
+  - BronzeCoin
   layers:
   - Default
   - TransparentFX
