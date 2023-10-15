@@ -21,13 +21,13 @@ public class ObstacleSpawner : MonoBehaviour
     System.Collections.IEnumerator SpawnObstacles()
     {
         while (true)
-    {
-        yield return new WaitForSeconds(Random.Range(spawnIntervalRange.x, spawnIntervalRange.y));
+        {
+            yield return new WaitForSeconds(Random.Range(spawnIntervalRange.x, spawnIntervalRange.y));
 
-        int randomObstacle = Random.Range(0, obstacles.Length);
+            int randomObstacle = Random.Range(0, obstacles.Length);
 
-        Vector2 spawnPosition = new Vector2(transform.position.x, groundLevelY); 
-        Instantiate(obstacles[randomObstacle], spawnPosition, Quaternion.identity);
-    }
+            Vector2 spawnPosition = new Vector2(transform.position.x, groundLevelY); 
+            Instantiate(obstacles[randomObstacle], spawnPosition, Quaternion.identity);
+        }
     }
 }

@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 228062706}
   - component: {fileID: 228062705}
   - component: {fileID: 228062707}
+  - component: {fileID: 228062708}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -302,6 +303,27 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+--- !u!95 &228062708
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228062701}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6532d78d40387d846a17014e990be7eb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &423048795
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,6 +442,7 @@ GameObject:
   m_Component:
   - component: {fileID: 464121052}
   - component: {fileID: 464121051}
+  - component: {fileID: 464121053}
   m_Layer: 0
   m_Name: ObstacleSpawner
   m_TagString: Untagged
@@ -459,6 +482,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1058453782}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &464121053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464121050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4dc5932cd574c846904df256057eca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &476969094
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,6 +590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b2e036ab91cf348b7f0e9b253fb42c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 0
   scoreText: {fileID: 2090486305}
 --- !u!1 &1058453781
 GameObject:
@@ -702,6 +738,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1543793397}
   - component: {fileID: 1543793398}
+  - component: {fileID: 1543793399}
   m_Layer: 0
   m_Name: CollectibleSpawner
   m_TagString: Untagged
@@ -740,8 +777,21 @@ MonoBehaviour:
   - {fileID: 5860681609959484692, guid: 3f9d4946a92882e4cb8c98aa9fb64af7, type: 3}
   - {fileID: 2021515172631136157, guid: ded609e23e694284aa50e9f2c103ff13, type: 3}
   - {fileID: 591370245623499066, guid: 54f68f348e773a2449067dc77a3df1b8, type: 3}
+  collectibleWeights: 060000000300000001000000
   spawnIntervalRange: {x: 1, y: 3}
   moveSpeed: 5
+--- !u!114 &1543793399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543793396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4dc5932cd574c846904df256057eca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1600214679
 GameObject:
   m_ObjectHideFlags: 0
