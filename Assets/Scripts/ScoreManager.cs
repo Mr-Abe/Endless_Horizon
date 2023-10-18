@@ -5,6 +5,8 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
 
+    public int currentScore = 0;
+
     public int score = 0;
     public TextMeshProUGUI scoreText;
 

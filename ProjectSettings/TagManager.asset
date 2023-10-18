@@ -10,6 +10,7 @@ TagManager:
   - GoldCoin
   - SilverCoin
   - BronzeCoin
+  - Obstacle
   layers:
   - Default
   - TransparentFX

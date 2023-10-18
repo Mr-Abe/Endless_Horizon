@@ -1,9 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public float runSpeed = 5f;
+    public float runSpeed = 0.77f;
     public float jumpForce = 5f;
 
     private Rigidbody2D rb;
@@ -59,17 +60,15 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            // This is just an example. You can have a more elaborate Game Over mechanic.
             GameOver();
         }
     }
 
     void GameOver()
     {
-        // Stop the game (example)
-        Time.timeScale = 0;
-        // Display some game over message
-        // Optionally reload the scene after a delay or on player input
+        PlayerPrefs.SetInt("Score", ScoreManager.instance.currentScore);
+
+         StartCoroutine(DelayedLoadGameOverScene());
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -81,4 +80,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    IEnumerator DelayedLoadGameOverScene()
+    {
+        yield return new WaitForSecondsRealtime(2); // wait for 2 seconds
+        UnityEngine.SceneManagement.SceneManager.LoadScene("GameOverScene");
+    }
 }
