@@ -4,13 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Sky
-  - Dunes
+  - Coin
+  - Asteroid
   - Ground
-  - GoldCoin
-  - SilverCoin
-  - BronzeCoin
-  - Obstacle
+  - Background
   layers:
   - Default
   - TransparentFX
@@ -18,8 +15,8 @@ TagManager:
   - Ground
   - Water
   - UI
-  - Foreground
-  - Background
+  - Asteroid
+  - Coins
   - 
   - 
   - 
@@ -47,10 +44,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Sky
-    uniqueID: 804799905
-    locked: 0
-  - name: Dunes
-    uniqueID: 4046952167
     locked: 0
